@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>妻夫木のチャット</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link id="style_select" rel="stylesheet" href="css/black.css">
+</head>
+<body>
+    
+<div>
+    <select id="themeSelect">
+        <option value="">デザイン</option>
+        <option id="style_green" value="css/green.css">lineカラー</option>
+        <option id="style_black" value="css/black.css">ブラック</option>
+    </select>
+</div>
+
+<div id="hide">
+    <img id="user_img" src="" alt="">
+</div>
+
+
+
+<!-- コンテンツ表示画面 -->
+
+<div id="chat_box">
+
+
+    <h1>柳葉のチャット</h1>
+
+
+    <div id="output"></div>
+
+
+
+    <div>
+        <input type="text" id="uname" placeholder="名前を入力してください">
+    </div>
+    <div>
+        <textarea id="text" placeholder="メッセージ"></textarea>
+    </div>
+    <button id="send">送信</button>
+</div>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="module">
+
+
+// 主題顏色切換
+$(document).ready(function(){
+    $("#themeSelect").change(function(){
+        var selectedTheme = $(this).find(":selected").val();
+        
+        if (selectedTheme !== "" && $("#style_select").attr("href") !== selectedTheme) {
+            $("#style_select").attr("href", selectedTheme);
+        }
+
+        $(this).val("");
+    });
+});
+
+
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+    from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    // apiKey: "",
+    // authDomain: "",
+    // projectId: "",
+    // storageBucket: "",
+    // messagingSenderId: "",
+    // appId: ""
+
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app); //RealtimeDBに接続
+const dbRef = ref(db, "chat"); //RealtimeDB内の"chat"を使う
+
+
+
+
+
+        //データ登録(Click)
+        $('#send').on('click', function () {
+            // value= 用戶名
+            document.getElementById('uname').value = '柳葉';
+            document.getElementById('user_img').value = 'yanagi';
+
+            const user_img = $('#user_img').val();
+            const uname = $('#uname').val();
+            const text = $('#text').val();
+
+
+
+            // $('#uname').val('');
+            $('#text').val('');
+
+            console.log(user_img,'user_img')
+            console.log(uname, 'unameの文字')
+            console.log(text, 'textの文字')
+
+            const msg = {
+                user_img: user_img,
+                name: uname,
+                text: text,
+
+            }
+
+
+            const newPostRef = push(dbRef);
+            set(newPostRef, msg);
+
+            // この下は消さない
+        })
+
+
+
+        //データ登録(Enter)
+
+        //最初にデータ取得＆onSnapshotでリアルタイムにデータを取得
+        onChildAdded(dbRef, function(data){
+            const msg = data.val();
+            const key = data.key;
+            // let html = `
+            // <div class=${key}>
+            //     <p>${msg.name}</p>
+            //     <p>${msg.text}</p>
+            // </div>
+            // `;
+
+            let html = `
+            <div class="message ${msg.name === '柳葉' ? 'right' : 'left'}">
+                <p id='name_and_img'><img id='user_img' src="img/${msg.user_img}.jpeg" alt="">${msg.name} </p>
+                <p class='msg_text'>${msg.text}</p>
+            </div>
+            `;
+
+        
+        console.log(msg)
+        $('#output').append(html)
+
+// 找到你的 output 元素
+var output = document.getElementById('output');
+// 將 output 容器捲動到最下方
+output.scrollTop = output.scrollHeight;
+
+
+
+
+
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
+

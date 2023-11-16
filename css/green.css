@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+    font-size: 25px;
+
+}
+
+body {
+    background-color: rgb(189, 187, 187);
+}
+
+#themeSelect {
+    background-color: white;
+    color: black;
+}
+
+
+#hide {
+    display: none;
+}
+
+h1 {
+    text-align: left;
+    margin: 50px 0;
+    font-size: 25px;
+}
+
+#chat_box {
+    width: 550px;
+    margin: 0 auto;
+}
+
+
+#user_img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+input {
+    width: 500px;
+    padding: 10px;
+    display: block;
+    margin: 0 auto 50px;
+    display: none;
+}
+
+textarea {
+    width: 500px;
+    height: 100px;
+    padding: 10px;
+    margin: 0 auto 5px;
+    display: block;
+    resize: none;
+}
+
+button {
+    width: 100px;
+    height: 50px;
+    margin: 0 auto 50px;
+    display: block;
+    font-size: 16px;
+    margin-right: 20px;
+    background-color: rgb(74, 114, 198);
+}
+
+#output {
+    background-color: rgb(160, 217, 252);
+    display: block;
+    width: 500px;
+    height: 750px;
+    border: 1px solid #ccc;
+    margin: 0 auto 30px;
+    border-radius: 8px;
+    padding: 10px;
+    overflow: auto;
+}
+
+#output div {
+    margin: 100px 0;
+}
+
+
+
+.message {
+    font-size: 25px;
+
+}
+
+/* 左对齐消息 */
+.message.left {
+    text-align: left;
+}
+
+.message.left .msg_text {
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    margin-right: auto;
+    width: fit-content;
+}
+
+
+
+/* 右对齐消息 */
+.message.right {
+    text-align: right;
+}
+
+.message.right .msg_text {
+    background-color: rgb(101, 241, 176);
+    border-radius: 5px;
+    margin-left: auto;
+    width: fit-content;
+}
+
+.message.right #name_and_img {
+    display: none;
+}
