@@ -22,12 +22,12 @@ Line風のアプリ
 テーマについて
 左上にデザインボタンがあり、それを押すとテーマが変わります。
 HTMLでさらにテーマを追加したい場合、
-<select id="themeSelect">の下に追加可能です。
+select id="themeSelect"の下に追加可能です。
 例えば
 css id > style_black
 cssファイル場所 > css/black.css
 名前 > ブラック
-<option id="style_black" value="css/black.css">ブラック</option>
+option id="style_black" value="css/black.css">ブラック
 これで、簡単にHTMLにテーマを追加します。
 
 送信について
